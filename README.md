@@ -1,2 +1,0 @@
-# gummum.github.io
-blog

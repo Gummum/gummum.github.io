@@ -1,0 +1,8 @@
+# main links
+main:
+  - title: "分类"
+    url: /categories/
+  - title: "专栏"
+    url: /dwdwd
+  - title: "关于我"
+    url: /about/
