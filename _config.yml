@@ -124,10 +124,10 @@ author:
       url: "mailto:1194148070@qq.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://facebook.com/"
+      url: "https://github.com/Gummum"
     - label: "CSDN"
       icon: "fab fa-fw fa-instalod"
-      url: "https://twitter.com/"
+      url: "https://blog.csdn.net/m0_52825229?type=blog"
     - label: "知乎"
       icon: "fab fa-fw fa-hive"
       url: "https://www.zhihu.com/people/betty-g"
@@ -141,10 +141,10 @@ footer:
       url: "mailto:1194148070@qq.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://facebook.com/"
+      url: "https://github.com/Gummum"
     - label: "CSDN"
       icon: "fab fa-fw fa-instalod"
-      url: "https://twitter.com/"
+      url: "https://blog.csdn.net/m0_52825229?type=blog"
     - label: "知乎"
       icon: "fab fa-fw fa-hive"
       url: "https://www.zhihu.com/people/betty-g"
@@ -330,3 +330,9 @@ defaults:
       share: # true
       related: false
       show_date: flase
+
+# Collections
+# collections:
+#   collection:
+#     output: true
+#     permalink: /:collection/:path/

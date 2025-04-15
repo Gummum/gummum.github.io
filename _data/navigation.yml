@@ -1,8 +1,12 @@
 # main links
 main:
+  - title: "首页"
+    url: /
   - title: "分类"
     url: /categories/
-  - title: "专栏"
-    url: /dwdwd
   - title: "关于我"
     url: /about/
+  - title: "脑洞清单"
+    url: /ideas/
+  - title: "技术专栏"
+    url: /collection/
