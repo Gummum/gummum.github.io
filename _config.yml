@@ -312,10 +312,9 @@ defaults:
       related: false
       toc: true                # 启用目录
       toc_sticky: true         # 使目录固定在页面上
-      toc_label: "目录"        # 自定义目录标题
+      # toc_label: "目录"        # 自定义目录标题
       show_date: false
       last_modified_at: false
-      tags: false
       enable_copy_code_button: true
       modified : false
   # _pages
