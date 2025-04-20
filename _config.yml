@@ -213,7 +213,7 @@ sass:
 
 
 # Outputting
-permalink: /:categories/:title/
+permalink: /:title
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
@@ -317,6 +317,7 @@ defaults:
       last_modified_at: false
       enable_copy_code_button: true
       modified : false
+      excerpt_separator: ""
   # _pages
   - scope:
       path: ""
