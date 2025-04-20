@@ -704,5 +704,4 @@ EventBits_t xEventGroupWaitBits( EventGroupHandle_t xEventGroup,
 
 创建事件标志组
 
-
 [参考链接](https://andyxi.blog.csdn.net/article/details/115397230)
