@@ -6,7 +6,11 @@ categories:
 
 MCU一般都自带定时器，属于硬件定时器，但是不同的MCU其硬件定时器数量不同，有时需要考虑成本的问题。在硬件定时器不够用的时候，FreeRTOS也提供了定时器功能，不过是属于软件定时器，其定时精度没有硬件定时器高，但是对于精度要求不高的周期性任务也足够了
 
-## 简介
+## 透查本质
+
+在freertos中出现是为了方便执行定时任务，但其是个可选项，同时本质是一个高优先级任务。
+
+## 软件定时器简介
 
 软件定时器允许设置一段时间，当设置的时间到达之后就会执行回调函数。软件定时器的回调函数是在定时器服务任务中执行的，因此不能在回调函数中调用会阻塞任务的API函数
 
@@ -18,9 +22,7 @@ MCU一般都自带定时器，属于硬件定时器，但是不同的MCU其硬�
 
 软件定时器分为两种：单次定时器和周期定时器。单次定时器在定时时间到了后执行一次回调函数就会停止运行；周期定时器一旦启动就会周期性的执行回调函数
 
-
 ![image.png](../assets/images/image_20250306_201004_182.png)
-
 
 ## 定时器的相关配置
 
@@ -95,7 +97,6 @@ static void prvCheckForValidListAndQueue( void ){
 
 ```
 
-
 ## 软件定时器API函数
 
 ### 复位软件定时器
@@ -114,7 +115,6 @@ BaseType_t xTimerResetFromISR(TimerHandle_t xTimer, //要复位的软件定时�
 
 ```
 
-
 复位定时器函数是一个宏，最终调用xTimerGenericCommand()函数
 
 ```c
@@ -127,7 +127,6 @@ BaseType_t xTimerResetFromISR(TimerHandle_t xTimer, //要复位的软件定时�
 //参数：1、软件定时器句柄;2、定义Reset编号;3、当前的系统的Tick值;4、null;5、阻塞时间
 
 ```
-
 
 ### 创建软件定时器
 
@@ -151,7 +150,6 @@ TimerHandle_t xTimerCreateStatic(char * const pcTimerName,//软件定时器名�
 返回值：创建成功返回软件定时器句柄；失败返回NULL
 
 ```
-
 
 创建软件定时器函数xTimerCreate()的源码分析如下示：
 
@@ -195,7 +193,6 @@ static void prvInitialiseNewTimer(const char * const pcTimerName,
 
 ```
 
-
 ### 开启软件定时器
 
 ```c
@@ -210,7 +207,6 @@ BaseType_t xTimerStartFromISR(TimerHandle_t xTimer, //要复位的软件定时�
 
 ```
 
-
 开始软件定时器函数是一个宏，最终调用xTimerGenericCommand()函数
 
 ```c
@@ -223,7 +219,6 @@ BaseType_t xTimerStartFromISR(TimerHandle_t xTimer, //要复位的软件定时�
 //参数：1、软件定时器句柄;2、定义Start编号;3、当前的系统的Tick值;4、null;5、阻塞时间
 
 ```
-
 
 ### 停止软件定时器
 
@@ -239,7 +234,6 @@ BaseType_t xTimerStopFromISR(TimerHandle_t xTimer,  //要复位的软件定时�
 
 ```
 
-
 停止软件定时器函数是一个宏，最终也是调用xTimerGenericCommand()函数
 
 ```c
@@ -252,7 +246,6 @@ BaseType_t xTimerStopFromISR(TimerHandle_t xTimer,  //要复位的软件定时�
 //参数：1、软件定时器句柄;2、定义Stop编号;3、不需要传入消息;4、null;5、阻塞时间
 
 ```
-
 
 函数xTimerGenericCommand()的源码如下：
 

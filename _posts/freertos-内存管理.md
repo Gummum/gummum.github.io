@@ -4,9 +4,13 @@ categories:
   - freertos
 ---
 
-内存管理是一个系统基本组成部分，FreeRTOS中大量使用了内存管理，比如创建任务、信号量、队列等会自动从堆中申请内存。用户应用层代码也可以使用FreeRTOS提供的内存管理函数来申请和释放内存
+## 透查本质
 
-## 简介
+内存是一片连续的物理空间，在物理世界里其实很弱，但为什么在软件的世界中他可以如此强大？主要还是靠管理，如何防止内存碎片，动态分配，变长，内存迁移。以及内存安全，内存debug。需要多从这些角度出发。
+
+## 内存管理简介
+
+内存管理是一个系统基本组成部分，FreeRTOS中大量使用了内存管理，比如创建任务、信号量、队列等会自动从堆中申请内存。用户应用层代码也可以使用FreeRTOS提供的内存管理函数来申请和释放内存
 
 FreeRTOS创建任务、信号量、队列等的时候有两种内存申请的方法：一种是动态的申请所需的RAM；一种是由用户自行定义所需的RAM（静态申请）。
 
@@ -28,7 +32,6 @@ FreeRTOS创建任务、信号量、队列等的时候有两种内存申请的方
 内存碎片是指小块的、碎片化的内存。内存碎片是伴随着内存申请和释放而来的，如下图所示
 
 ![image.png](../assets/images/image_20250226_212747_776.png)
-
 
 FreeRTOS使用pvPortMalloc()函数来替代malloc()申请内存，使用vPortFree()函数来替代 free()释放内存
 
@@ -55,7 +58,6 @@ FreeRTOS使用pvPortMalloc()函数来替代malloc()申请内存，使用vPortFre
   static uint8_t ucHeap[configTOTAL_HEAP_SIZE]; //编译器决定
 
 ```
-
 
 heap\_1内存分配的特点如下：
 
@@ -109,7 +111,6 @@ void *pvPortMalloc( size_t xWantedSize ){
 
 ```
 
-
 ### 内存释放函数
 
 ```c
@@ -121,10 +122,9 @@ void vPortFree( void *pv ){
 
 ```
 
-
 ## heap\_2内存分配方法
 
-### 分配方法介绍
+### heap\_2分配方法介绍
 
 heap\_2提供了内存释放函数，但是缺点是不会把释放的内存块合并成大的内存块，因此随着不断的申请释放内存，内存堆就会被分为多个大小不一的内存块，也就是会导致内存碎片
 
@@ -138,7 +138,6 @@ typedef struct A_BLOCK_LINK
 } BlockLink_t;
 ```
 
-
 heap\_2内存分配的特点如下：
 
 - 可使用在可能会重复的删除任务、队列、信号量等的应用中
@@ -146,7 +145,6 @@ heap\_2内存分配的特点如下：
 - 具有不可确定性，但仍比标准C中的malloc()和free()效率高
 
 ![image.png](../assets/images/image_20250226_212810_565.png)
-
 
 ### 内存堆初始化函数
 
@@ -173,11 +171,9 @@ static void prvHeapInit( void ){
 
 ```
 
-
 初始化后的内存堆
 
 ![image.png](../assets/images/image_20250226_212823_817.png)
-
 
 ### 内存块插入函数
 
@@ -200,8 +196,7 @@ heap\_2允许内存释放，可用使用内存块插入函数将释放的内存�
 
 ```
 
-
-### 内存申请函数
+### heap\_2内存申请函数
 
 ```c
 void *pvPortMalloc( size_t xWantedSize ){
@@ -267,8 +262,7 @@ void *pvPortMalloc( size_t xWantedSize ){
 
 ```
 
-
-### 内存释放函数
+### heap\_2内存释放函数
 
 ```c
 void vPortFree( void *pv ){
@@ -292,10 +286,9 @@ void vPortFree( void *pv ){
 
 ```
 
-
 ## heap\_3内存分配方法
 
-### 分配方法介绍
+### heap\_3分配方法介绍
 
 heap\_3是对标准C中的malloc()和free()的简单封装，并做了线程保护
 
@@ -306,7 +299,7 @@ heap\_3内存分配的特点如下：
 - configTOTAL\_HEAP\_SZIE不起作用
 - 具有不确定性，并且会增加代码量
 
-### 内存申请函数
+### heap\_3内存申请函数
 
 ```c
 void *pvPortMalloc( size_t xWantedSize ){
@@ -330,8 +323,7 @@ void *pvPortMalloc( size_t xWantedSize ){
 
 ```
 
-
-### 内存释放函数
+### heap\_3内存释放函数
 
 ```c
 void vPortFree( void *pv ){
@@ -347,10 +339,9 @@ void vPortFree( void *pv ){
 
 ```
 
-
 ## heap\_4内存分配方法
 
-### 分配方法介绍
+### heap\_4分配方法介绍
 
 heap\_4提供了一个最优的匹配算法，与heap\_2不同，heap\_4会将内存碎片合并成一个大的可用内存块
 
@@ -362,7 +353,7 @@ heap\_4内存分配的特点如下：
 
 ![image.png](../assets/images/image_20250226_212837_932.png)
 
-### 内存堆初始化函数
+### heap\_4内存堆初始化函数
 
 ```c
 static void prvHeapInit( void ){
@@ -401,13 +392,11 @@ static void prvHeapInit( void ){
 
 ```
 
-
 完成初始化后的内存堆
 
 ![image.png](../assets/images/image_20250226_212844_790.png)
 
-
-### 内存块插入函数
+### heap\_4内存块插入函数
 
 内存块插入函数用来将某个内存块插入到空闲内存块链表中，其源码如下
 
@@ -454,8 +443,7 @@ static void prvInsertBlockIntoFreeList( BlockLink_t *pxBlockToInsert ){
 
 ```
 
-
-### 内存申请函数
+### heap\_4内存申请函数
 
 ```c
 void *pvPortMalloc( size_t xWantedSize ){
@@ -558,8 +546,7 @@ void *pvPortMalloc( size_t xWantedSize ){
 
 ```
 
-
-### 内存释放函数
+### heap\_4内存释放函数
 
 ```c
 void vPortFree( void *pv ){
@@ -598,10 +585,9 @@ void vPortFree( void *pv ){
 
 ```
 
-
 ## heap\_5内存分配方法
 
-### 分配方法介绍
+### heap\_5分配方法介绍
 
 heap\_5使用与heap\_4相同的合并算法，内存管理基本相同。但是heap\_5允许内存堆跨越多个不连续的内存段。比如外接了SRAM的STM32，如果使用heap\_4的话就只能在内部RAM和外部SRAM中二选一，若使用heap\_5则两个都可以一起作为内存堆来使用
 
@@ -618,7 +604,6 @@ typedef struct HeapRegion
 
 ```
 
-
 以STM32F103为例，现有两个内存段：内部SRAM和外部SRAM，起始地址分别为：0x20000000、0x68000000，大小分别为：64KB，1MB，那么数组就如下：
 
 ```c
@@ -630,6 +615,5 @@ HeapRegion_t xHeapRegions[] =
 }
 
 ```
-
 
 heap\_5的内存申请与释放函数和heap\_4的基本一样，可参考heap\_4的内存申请与释放函数
