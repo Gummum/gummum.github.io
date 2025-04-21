@@ -4,9 +4,11 @@ categories:
   - freertos
 ---
 
+## 透查本质
 
+本质还是管理数据结构, 和c++的queue是差不多的。然后加了一层任务管理和调试信息。
 
-## 简介
+## 消息队列简介
 
 消息队列可以在任务与任务、任务与中断之间传递消息，队列可以保存有限个具有确定长度的数据单元。队列可保存的最大单元数目被称为队列的长度，在队列创建时需要指定其长度和每个单元（队列项或消息）的大小。通常情况下，队列被作为FIFO（先进先出）使用，即数据由队尾写入，从队首读出。当然由队列首写入也是可能的。
 
@@ -69,7 +71,6 @@ typedef xQUEUE Queue_t;
 
 ```
 
-
 ## 消息队列的函数应用
 
 ### 创建消息队列
@@ -99,7 +100,6 @@ QueueHandle_t xQueueGenericCreateStatic(const UBaseType_t uxQueueLength,//要创
 返回值：创建成功返回队列句柄；失败返回NULL
 
 ```
-
 
 动态创建队列最终会调用xQueueGenericCreate()函数，下面来分析该源码（静态创建类似，不做分析）
 
@@ -131,7 +131,6 @@ QueueHandle_t xQueueGenericCreate(const UBaseType_t uxQueueLength,
 
 ```
 
-
 队列初始化函数prvInitialiseNewQueue()源码分析
 
 ```c
@@ -158,7 +157,6 @@ static void prvInitialiseNewQueue(const UBaseType_t uxQueueLength,
 }
 
 ```
-
 
 队列复位函数xQueueGenericReset源码分析
 
@@ -204,7 +202,6 @@ BaseType_t xQueueGenericReset( QueueHandle_t xQueue, BaseType_t xNewQueue){
 
 ```
 
-
 ### 向队列发送消息
 
 #### 任务级入队函数
@@ -234,7 +231,6 @@ BaseType_t xQueueGenericSend(QueueHandle_t xQueue, //队列句柄,指明向哪�
 返回值：发送消息成功，返回pdPASS;队列满消息发送失败，返回errQUEUE_FULL
 
 ```
-
 
 任务级入队函数最终都是调用xQueueGenericSend()函数，下面来分析该函数源码
 
@@ -334,7 +330,6 @@ BaseType_t xQueueGenericSend(QueueHandle_t xQueue,
 
 ```
 
-
 #### 中断级入队函数
 
 ```c
@@ -363,7 +358,6 @@ BaseType_t xQueueGenericSendFromISR(QueueHandle_t xQueue,
 返回值：发送消息成功，返回pdPASS;队列满消息发送失败，返回errQUEUE_FULL
 
 ```
-
 
 中断级入队函数最终都是调用xQueueGenericSendFromISR()函数，下面来分析该函数源码
 
@@ -431,7 +425,6 @@ BaseType_t xQueueGenericSendFromISR(QueueHandle_t xQueue,
 
 ```
 
-
 ### 队列上锁和解锁
 
 #### 队列上锁&#x20;
@@ -455,7 +448,6 @@ prvLockQueue()：本质上是一个宏，定义如下
   taskEXIT_CRITICAL()
 
 ```
-
 
 ```c
 //上锁计数器cRxLock和cTxLock记录了队列上锁期间，入队或出队的数量
@@ -515,7 +507,6 @@ static void prvUnlockQueue( Queue_t * const pxQueue ){
 }
 
 ```
-
 
 #### 队列解锁
 
@@ -578,7 +569,6 @@ static void prvUnlockQueue( Queue_t * const pxQueue ){
 
 ```
 
-
 ### 队列读取消息
 
 #### 任务级出队函数
@@ -601,7 +591,6 @@ BaseType_t xQueueGenericReceive(QueueHandle_t xQueue,
 返回值：读取数据成功，返回pdTRUE；读取失败，返回pdFALSE
 
 ```
-
 
 > 任务级出队函数最终都是调用xQueueGenericReceive()函数，出队与入队的源码流程差不多，在此不再赘述
 
