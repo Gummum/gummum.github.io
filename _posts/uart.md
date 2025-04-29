@@ -1,5 +1,5 @@
 ---
-title: "CAN"
+title: "UART"
 categories:
   - 硬件通信协议
 ---
