@@ -2,8 +2,6 @@
 main:
   - title: "首页"
     url: /
-  - title: "分类"
-    url: /categories/
   - title: "关于我"
     url: /about/
   - title: "脑洞清单"
