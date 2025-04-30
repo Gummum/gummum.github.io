@@ -38,7 +38,7 @@ categories:
 
 主机向从机发送数据
 
-![主机向从机发送数据](https://img-blog.csdn.net/2018070623142994?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaWNoaTEyMzEzNw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![主机向从机发送数据](https://pic2.zhimg.com/v2-57d41a637f3e928103c0a7d6e86abc4f_1440w.jpg)
 
 从机向主机发送数据
 
