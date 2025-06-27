@@ -90,6 +90,19 @@ fsync 会等待实际写操作结束。对单个fd。
 
 fdatasync 只同步文件数据。不同步文件属性。
 
+根据linux man文档的描述
+
+```text
+NOTES
+
+  Since  glibc  2.2.2,  the Linux prototype for sync() is as listed above, following the various standards.  In glibc 2.2.1 and earlier, it
+  was "int sync(void)", and sync() always returned 0.
+
+  According to the standard specification (e.g., POSIX.1-2001), sync() schedules the writes, but may return before the  actual  writing  is
+  done.   However Linux waits for I/O completions, and thus sync() or syncfs() provide the same guarantees as fsync called on every file in
+  the system or filesystem respectively.
+```
+
 ## fcntl函数
 
 改变已经打开文件的属性
