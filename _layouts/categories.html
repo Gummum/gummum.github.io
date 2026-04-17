@@ -2,6 +2,7 @@
 layout: archive
 ---
 
+{% assign items_sorted = site.categories | sort %}
 {% assign items_max = 0 %}
 {% for item in site.categories %}
   {% if item[1].size > items_max %}
@@ -11,11 +12,8 @@ layout: archive
 
 <section class="category-hub">
   <div class="category-hub__intro">
-    <p class="home-section-kicker">Category Directory</p>
+    <p class="home-kicker">Category Directory</p>
     <h2 class="category-hub__title">按主题浏览文章</h2>
-    <p class="category-hub__lead">
-      把内容按问题域拆开，方便先按主题扫一遍，再进入具体文章深挖。
-    </p>
   </div>
 
   <div class="category-hub__meta">
@@ -32,10 +30,7 @@ layout: archive
 
 <section class="category-overview">
   <div class="category-overview__header">
-    <div>
-      <p class="home-section-kicker">Overview</p>
-      <h2 class="archive__subtitle">分类总览</h2>
-    </div>
+    <h2 class="archive__subtitle">分类总览</h2>
   </div>
 
   <div class="category-overview__grid">
@@ -51,3 +46,24 @@ layout: archive
     {% endfor %}
   </div>
 </section>
+
+{% for i in (1..items_max) reversed %}
+  {% for item in site.categories %}
+    {% if item[1].size == i %}
+      <section id="{{ item[0] | slugify }}" class="category-section">
+        <div class="category-section__header">
+          <h3 class="category-section__name">{{ item[0] }}</h3>
+          <span class="category-section__count">{{ item[1].size }} 篇</span>
+        </div>
+        <ul class="category-section__list">
+          {% assign sorted_posts = item[1] | sort: "title" %}
+          {% for post in sorted_posts %}
+            <li class="category-section__item">
+              <a href="{{ post.url | relative_url }}" class="category-section__link">{{ post.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endif %}
+  {% endfor %}
+{% endfor %}

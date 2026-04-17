@@ -8,35 +8,7 @@ entries_layout: list
 
 <section class="home-hero">
   <div class="home-hero__main">
-    <p class="home-kicker">Embedded Systems Knowledge Base</p>
-    <h1 class="home-hero__title">把底层系统问题，整理成能复用的知识地图。</h1>
-    <p class="home-hero__lead">
-      这里长期记录 Linux、RTOS、C/C++、协议通信、调试分析和工程方法。重点不是摘抄概念，
-      而是把调用路径、关键机制、源码落点和真实问题讲清楚。
-    </p>
-
-    <div class="home-hero__actions">
-      <a class="home-button home-button--primary" href="{{ '/categories/' | relative_url }}">进入专题</a>
-      <a class="home-button home-button--secondary" href="#latest-writing">查看最新文章</a>
-    </div>
-  </div>
-
-  <aside class="home-hero__panel" aria-label="写作方法">
-    <p class="home-panel__label">Writing Lens</p>
-    <ul class="home-focus-list">
-      <li>
-        <strong>从调用路径理解系统</strong>
-        <span>把入口、主路径、慢路径串起来，避免只记零散结论。</span>
-      </li>
-      <li>
-        <strong>从真实故障回到源码</strong>
-        <span>关注线上问题、调试证据和代码中的真实落点。</span>
-      </li>
-      <li>
-        <strong>从专题而不是时间线进入</strong>
-        <span>把知识按问题域组织，适合回看、串联和持续扩展。</span>
-      </li>
-    </ul>
+    <blockquote class="home-hero__quote">世界蠢的不可思议，我也是!</blockquote>
 
     <div class="home-hero__metrics">
       <div class="home-metric">
@@ -47,10 +19,6 @@ entries_layout: list
         <span class="home-metric__value">{{ site.categories | size }}</span>
         <span class="home-metric__label">个分类</span>
       </div>
-      <div class="home-metric">
-        <span class="home-metric__value">持续更新</span>
-        <span class="home-metric__label">围绕系统问题写作</span>
-      </div>
     </div>
-  </aside>
+  </div>
 </section>
