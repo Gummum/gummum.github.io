@@ -2,92 +2,248 @@
 layout: archive
 ---
 
-{% if paginator %}
-  {% assign posts = paginator.posts %}
-{% else %}
-  {% assign posts = site.posts %}
+{% assign is_landing_page = true %}
+{% if paginator and paginator.page != 1 %}
+  {% assign is_landing_page = false %}
 {% endif %}
 
-{% assign featured_post = posts | first %}
-{% assign stream_posts = posts | slice: 1, 6 %}
-{% assign spotlight_posts = site.posts | slice: 0, 3 %}
+{% assign all_posts = site.posts %}
+{% assign featured_post = all_posts | first %}
+{% assign supporting_posts = all_posts | slice: 1, 2 %}
+{% assign recent_posts = all_posts | slice: 3, 6 %}
+{% assign kernel_mm_posts = site.posts | where_exp: "post", "post.path contains 'kernel/mm/'" %}
+{% assign linux_count = site.categories["Linux"] | size %}
+{% assign unix_count = site.categories["UNIX环境高级编程"] | size %}
+{% assign linux_unix_count = linux_count | plus: unix_count %}
+{% assign freertos_count = site.categories["freertos"] | size %}
+{% assign cpp_count = site.categories["C++与系统编程"] | size %}
+{% assign network_count = site.categories["计算机网络"] | size %}
+{% assign wired_count = site.categories["有线硬件通信协议"] | size %}
+{% assign wireless_count = site.categories["无线通信协议"] | size %}
+{% assign protocol_count = network_count | plus: wired_count | plus: wireless_count %}
+{% assign architecture_count = site.categories["软件架构"] | size %}
+{% assign coredump_count = site.categories["coredump分析"] | size %}
+{% assign methods_count = architecture_count | plus: coredump_count %}
 
-{{ content }}
+{% if is_landing_page %}
+  {{ content }}
 
-{% if featured_post %}
-  <section class="home-showcase">
-    <article class="home-feature">
-      <p class="home-section-kicker">Featured Note</p>
-      <a class="home-feature__link" href="{{ featured_post.url | relative_url }}">
-        <h2 class="home-feature__title">{{ featured_post.title }}</h2>
-        {% if featured_post.excerpt %}
-          <p class="home-feature__excerpt">{{ featured_post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
-        {% endif %}
+  <section class="home-topic-board">
+    <div class="home-section-heading">
+      <div>
+        <p class="home-kicker">Topic Index</p>
+        <h2 class="archive__subtitle">先按专题进入，再顺着文章深入。</h2>
+      </div>
+      <p class="home-section-lead">
+        首页不再只是时间线。把站内最稳定的知识簇单独做入口，第一次访问时可以更快定位方向。
+      </p>
+    </div>
+
+    <div class="home-topic-grid">
+      <a class="home-topic-card" href="{{ 'UNIX环境高级编程' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">System Basics</p>
+        <h3 class="home-topic-card__title">Linux 与 UNIX 系统基础</h3>
+        <p class="home-topic-card__desc">进程、线程、文件 IO、信号、IPC 与系统接口行为，是很多问题的起点。</p>
+        <div class="home-topic-card__meta">
+          <span>{{ linux_unix_count }} 篇</span>
+          <span>从机制出发</span>
+        </div>
       </a>
 
-      <div class="home-feature__meta">
-        <span>{{ featured_post.date | date: "%Y.%m.%d" }}</span>
-        {% if featured_post.categories and featured_post.categories[0] %}
-          <span>{{ featured_post.categories[0] }}</span>
-        {% endif %}
+      <a class="home-topic-card home-topic-card--tinted" href="{{ 'mm' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Kernel Memory</p>
+        <h3 class="home-topic-card__title">Linux 内核 mm 专题</h3>
+        <p class="home-topic-card__desc">围绕 VMA、页表、缺页、回收、迁移与 slab，把内存子系统写成系列地图。</p>
+        <div class="home-topic-card__meta">
+          <span>{{ kernel_mm_posts | size }} 篇</span>
+          <span>系列化输出</span>
+        </div>
+      </a>
+
+      <a class="home-topic-card" href="{{ 'freertos' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">RTOS</p>
+        <h3 class="home-topic-card__title">FreeRTOS 与实时系统</h3>
+        <p class="home-topic-card__desc">任务调度、同步互斥、中断、低功耗、时间管理与资源约束下的设计权衡。</p>
+        <div class="home-topic-card__meta">
+          <span>{{ freertos_count }} 篇</span>
+          <span>面向嵌入式工程</span>
+        </div>
+      </a>
+
+      <a class="home-topic-card" href="{{ 'C++与系统编程' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Language + Systems</p>
+        <h3 class="home-topic-card__title">C++ 与系统编程</h3>
+        <p class="home-topic-card__desc">把语言特性放回工程语境里看，关注资源管理、并发语义和接口设计。</p>
+        <div class="home-topic-card__meta">
+          <span>{{ cpp_count }} 篇</span>
+          <span>偏工程实践</span>
+        </div>
+      </a>
+
+      <a class="home-topic-card" href="{{ '计算机网络' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Protocols</p>
+        <h3 class="home-topic-card__title">网络与通信协议</h3>
+        <p class="home-topic-card__desc">从传统网络到有线、无线通信协议，重点看分层模型、链路行为和接口约束。</p>
+        <div class="home-topic-card__meta">
+          <span>{{ protocol_count }} 篇</span>
+          <span>覆盖多种协议</span>
+        </div>
+      </a>
+
+      <a class="home-topic-card" href="{{ '软件架构' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Methods</p>
+        <h3 class="home-topic-card__title">调试分析与工程方法</h3>
+        <p class="home-topic-card__desc">把 coredump、设计原则、架构方法和排障思路沉淀成可以反复复用的框架。</p>
+        <div class="home-topic-card__meta">
+          <span>{{ methods_count }} 篇</span>
+          <span>偏排障与设计</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  {% if featured_post %}
+    <section class="home-editorial">
+      <div class="home-section-heading">
+        <div>
+          <p class="home-kicker">Editor Picks</p>
+          <h2 class="archive__subtitle">先看重点，再进入最近更新。</h2>
+        </div>
+        <p class="home-section-lead">
+          把最值得从首页进入的内容做成主次分层，不让所有文章都用同一种卡片说话。
+        </p>
       </div>
-    </article>
 
-    <aside class="home-rail">
-      <section class="home-rail__card">
-        <p class="home-section-kicker">Topics</p>
-        <div class="home-topic-list">
-          {% for category in site.categories limit: 6 %}
-            <a class="home-topic-pill" href="{{ category[0] | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
-              <span>{{ category[0] }}</span>
-              <strong>{{ category[1] | size }}</strong>
-            </a>
+      <div class="home-editorial__grid">
+        <article class="home-lead-story">
+          <p class="home-lead-story__kicker">Lead Story</p>
+          <a class="home-lead-story__link" href="{{ featured_post.url | relative_url }}">
+            <h3 class="home-lead-story__title">{{ featured_post.title }}</h3>
+            {% if featured_post.excerpt %}
+              <p class="home-lead-story__excerpt">{{ featured_post.excerpt | markdownify | strip_html | truncate: 200 }}</p>
+            {% endif %}
+          </a>
+          <div class="home-story-meta">
+            <span>{{ featured_post.date | date: "%Y.%m.%d" }}</span>
+            {% if featured_post.categories and featured_post.categories[0] %}
+              <span>{{ featured_post.categories[0] }}</span>
+            {% endif %}
+          </div>
+        </article>
+
+        <div class="home-supporting-stories">
+          {% for post in supporting_posts %}
+            <article class="home-support-story">
+              <p class="home-support-story__kicker">Selected Reading</p>
+              <a class="home-support-story__link" href="{{ post.url | relative_url }}">
+                <h3 class="home-support-story__title">{{ post.title }}</h3>
+                {% if post.excerpt %}
+                  <p class="home-support-story__excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 110 }}</p>
+                {% endif %}
+              </a>
+              <div class="home-story-meta">
+                <span>{{ post.date | date: "%Y.%m.%d" }}</span>
+                {% if post.categories and post.categories[0] %}
+                  <span>{{ post.categories[0] }}</span>
+                {% endif %}
+              </div>
+            </article>
           {% endfor %}
         </div>
-      </section>
+      </div>
+    </section>
+  {% endif %}
 
-      <section class="home-rail__card">
-        <p class="home-section-kicker">Recent Highlights</p>
-        <div class="home-mini-list">
-          {% for post in spotlight_posts %}
-            <a class="home-mini-list__item" href="{{ post.url | relative_url }}">
-              <span class="home-mini-list__date">{{ post.date | date: "%m.%d" }}</span>
-              <span class="home-mini-list__title">{{ post.title }}</span>
-            </a>
-          {% endfor %}
-        </div>
-      </section>
-    </aside>
+  <section id="latest-writing" class="home-latest">
+    <div class="home-section-heading">
+      <div>
+        <p class="home-kicker">Latest Writing</p>
+        <h2 class="archive__subtitle">最近更新</h2>
+      </div>
+      <a class="home-inline-link" href="{{ '/categories/' | relative_url }}">浏览全部分类</a>
+    </div>
+
+    <div class="home-latest__list">
+      {% for post in recent_posts %}
+        <article class="home-latest__item">
+          <span class="home-latest__index">{{ forloop.index | prepend: "0" }}</span>
+          <div class="home-latest__body">
+            <p class="home-story-meta">
+              <span>{{ post.date | date: "%Y.%m.%d" }}</span>
+              {% if post.categories and post.categories[0] %}
+                <span>{{ post.categories[0] }}</span>
+              {% endif %}
+            </p>
+            <h3 class="home-latest__title">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h3>
+            {% if post.excerpt %}
+              <p class="home-latest__excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 120 }}</p>
+            {% endif %}
+          </div>
+          <a class="home-latest__cta" href="{{ post.url | relative_url }}">阅读</a>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="home-manifesto">
+    <div class="home-manifesto__intro">
+      <p class="home-kicker">About This Site</p>
+      <h2 class="archive__subtitle">这不是资讯站，更像一个持续生长的技术笔记库。</h2>
+      <p class="home-section-lead">
+        我长期关注嵌入式、Linux、驱动、RTOS、协议与系统问题分析。这里的写作目标是把零散经验整理成结构化笔记，
+        让文章既能解决当前问题，也能在半年后重新拿出来继续用。
+      </p>
+      <a class="home-inline-link" href="{{ '/about/' | relative_url }}">了解更多</a>
+    </div>
+
+    <div class="home-principles">
+      <div class="home-principle">
+        <strong>问题先于概念</strong>
+        <span>优先回答“为什么会这样”和“出问题时该怎么定位”。</span>
+      </div>
+      <div class="home-principle">
+        <strong>源码高于结论</strong>
+        <span>尽量把文章落到关键对象、关键函数和调用路径，而不止停留在定义层面。</span>
+      </div>
+      <div class="home-principle">
+        <strong>专题优于碎片</strong>
+        <span>让新内容能挂回已有结构，逐步变成可检索、可复用、可延伸的知识地图。</span>
+      </div>
+    </div>
+  </section>
+{% else %}
+  <section class="home-archive-page">
+    <div class="home-section-heading">
+      <div>
+        <p class="home-kicker">Archive</p>
+        <h2 class="archive__subtitle">更多文章</h2>
+      </div>
+      <p class="home-section-lead">
+        当前是第 {{ paginator.page }} 页，保留更纯粹的文章流浏览方式。
+      </p>
+    </div>
+
+    <div class="home-archive-grid">
+      {% for post in paginator.posts %}
+        <article class="home-archive-card">
+          <p class="home-story-meta">
+            <span>{{ post.date | date: "%Y.%m.%d" }}</span>
+            {% if post.categories and post.categories[0] %}
+              <span>{{ post.categories[0] }}</span>
+            {% endif %}
+          </p>
+          <h3 class="home-archive-card__title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h3>
+          {% if post.excerpt %}
+            <p class="home-archive-card__excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 140 }}</p>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
   </section>
 {% endif %}
-
-<section class="home-stream">
-  <div class="home-stream__header">
-    <div>
-      <p class="home-section-kicker">Latest Writing</p>
-      <h3 class="archive__subtitle">最近更新</h3>
-    </div>
-    <a class="home-stream__link" href="{{ '/categories/' | relative_url }}">浏览全部分类</a>
-  </div>
-
-  <div class="home-stream__grid">
-    {% for post in stream_posts %}
-      <article class="home-post-card">
-        <p class="home-post-card__meta">
-          <span>{{ post.date | date: "%Y.%m.%d" }}</span>
-          {% if post.categories and post.categories[0] %}
-            <span>{{ post.categories[0] }}</span>
-          {% endif %}
-        </p>
-        <h4 class="home-post-card__title">
-          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        </h4>
-        {% if post.excerpt %}
-          <p class="home-post-card__excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 120 }}</p>
-        {% endif %}
-      </article>
-    {% endfor %}
-  </div>
-</section>
 
 {% include paginator.html %}
