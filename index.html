@@ -1,4 +1,31 @@
 ---
-layout: categories
-author_profile: true
+layout: home
+title: "首页"
+classes: wide
+author_profile: false
+entries_layout: list
 ---
+
+<section class="home-intro">
+  <p class="home-intro__eyebrow">Embedded Systems Notes</p>
+  <h1 class="home-intro__title">把复杂系统拆开，写成能反复使用的知识。</h1>
+  <p class="home-intro__lead">
+    这里主要记录嵌入式、Linux、网络、C/C++、FreeRTOS，以及做工程时真正会遇到的问题。
+  </p>
+
+  <div class="home-intro__actions">
+    <a class="home-intro__primary" href="/categories/">看文章分类</a>
+    <a class="home-intro__secondary" href="/about/">关于我</a>
+  </div>
+
+  <div class="home-intro__meta">
+    <div class="home-intro__stat">
+      <span class="home-intro__stat-value">{{ site.posts | size }}</span>
+      <span class="home-intro__stat-label">篇文章</span>
+    </div>
+    <div class="home-intro__stat">
+      <span class="home-intro__stat-value">{{ site.categories | size }}</span>
+      <span class="home-intro__stat-label">个分类</span>
+    </div>
+  </div>
+</section>

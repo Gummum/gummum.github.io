@@ -12,26 +12,6 @@ $(document).ready(function () {
     $(".author__urls-wrapper").find("button").toggleClass("open");
   });
 
-  // Close search screen with Esc key
-  $(document).keyup(function (e) {
-    if (e.keyCode === 27) {
-      if ($(".initial-content").hasClass("is--hidden")) {
-        $(".search-content").toggleClass("is--visible");
-        $(".initial-content").toggleClass("is--hidden");
-      }
-    }
-  });
-
-  // Search toggle
-  $(".search__toggle").on("click", function () {
-    $(".search-content").toggleClass("is--visible");
-    $(".initial-content").toggleClass("is--hidden");
-    // set focus on input
-    setTimeout(function () {
-      $(".search-content input").focus();
-    }, 400);
-  });
-
   // Smooth scrolling
   var scroll = new SmoothScroll('a[href*="#"]', {
     offset: 20,
@@ -231,4 +211,115 @@ $(document).ready(function () {
         container.prepend(copyButton);
       });
   }
+
+  // Inline nav search
+  (function () {
+    var input = document.getElementById("nav-search-input");
+    var results = document.getElementById("nav-search-results");
+
+    if (!input || !results || typeof store === "undefined") return;
+
+    var maxResults = 6;
+
+    function escapeHtml(text) {
+      return String(text || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function normalize(value) {
+      return String(value || "").toLowerCase().trim();
+    }
+
+    function summarize(text) {
+      return String(text || "").replace(/\s+/g, " ").trim().slice(0, 96);
+    }
+
+    function scoreItem(item, query) {
+      var title = normalize(item.title);
+      var excerpt = normalize(item.excerpt);
+      var categories = normalize((item.categories || []).join(" "));
+      var tags = normalize((item.tags || []).join(" "));
+      var score = 0;
+
+      if (title.indexOf(query) !== -1) score += 120;
+      if (categories.indexOf(query) !== -1) score += 50;
+      if (tags.indexOf(query) !== -1) score += 30;
+      if (excerpt.indexOf(query) !== -1) score += 10;
+
+      return score;
+    }
+
+    function findMatches(query) {
+      return store
+        .map(function (item) {
+          return { item: item, score: scoreItem(item, query) };
+        })
+        .filter(function (entry) {
+          return entry.score > 0;
+        })
+        .sort(function (a, b) {
+          return b.score - a.score;
+        })
+        .slice(0, maxResults);
+    }
+
+    function renderResults(matches, query) {
+      if (!query) {
+        results.hidden = true;
+        results.innerHTML = "";
+        return;
+      }
+
+      if (!matches.length) {
+        results.hidden = false;
+        results.innerHTML =
+          '<div class="nav-search__empty">没有找到和 “' + escapeHtml(query) + '” 相关的内容</div>';
+        return;
+      }
+
+      results.hidden = false;
+      results.innerHTML = matches
+        .map(function (entry) {
+          var item = entry.item;
+          var meta = (item.categories && item.categories[0]) ? escapeHtml(item.categories[0]) : "文章";
+          return (
+            '<a class="nav-search__item" href="' + escapeHtml(item.url) + '">' +
+              '<span class="nav-search__item-meta">' + meta + '</span>' +
+              '<strong class="nav-search__item-title">' + escapeHtml(item.title) + '</strong>' +
+              '<span class="nav-search__item-excerpt">' + escapeHtml(summarize(item.excerpt)) + '</span>' +
+            '</a>'
+          );
+        })
+        .join("");
+    }
+
+    input.addEventListener("input", function (event) {
+      var query = normalize(event.target.value);
+      renderResults(findMatches(query), query);
+    });
+
+    input.addEventListener("focus", function () {
+      var query = normalize(input.value);
+      if (query) {
+        renderResults(findMatches(query), query);
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!results.contains(event.target) && event.target !== input) {
+        results.hidden = true;
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        results.hidden = true;
+        input.blur();
+      }
+    });
+  })();
 });

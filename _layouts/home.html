@@ -2,19 +2,92 @@
 layout: archive
 ---
 
-{{ content }}
-
-<h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
-
 {% if paginator %}
   {% assign posts = paginator.posts %}
 {% else %}
   {% assign posts = site.posts %}
 {% endif %}
 
-{% assign entries_layout = page.entries_layout | default: 'list' %}
-<div class="entries-{{ entries_layout }}">
-  {% include documents-collection.html entries=posts type=entries_layout %}
-</div>
+{% assign featured_post = posts | first %}
+{% assign stream_posts = posts | slice: 1, 6 %}
+{% assign spotlight_posts = site.posts | slice: 0, 3 %}
+
+{{ content }}
+
+{% if featured_post %}
+  <section class="home-showcase">
+    <article class="home-feature">
+      <p class="home-section-kicker">Featured Note</p>
+      <a class="home-feature__link" href="{{ featured_post.url | relative_url }}">
+        <h2 class="home-feature__title">{{ featured_post.title }}</h2>
+        {% if featured_post.excerpt %}
+          <p class="home-feature__excerpt">{{ featured_post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
+        {% endif %}
+      </a>
+
+      <div class="home-feature__meta">
+        <span>{{ featured_post.date | date: "%Y.%m.%d" }}</span>
+        {% if featured_post.categories and featured_post.categories[0] %}
+          <span>{{ featured_post.categories[0] }}</span>
+        {% endif %}
+      </div>
+    </article>
+
+    <aside class="home-rail">
+      <section class="home-rail__card">
+        <p class="home-section-kicker">Topics</p>
+        <div class="home-topic-list">
+          {% for category in site.categories limit: 6 %}
+            <a class="home-topic-pill" href="{{ category[0] | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+              <span>{{ category[0] }}</span>
+              <strong>{{ category[1] | size }}</strong>
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="home-rail__card">
+        <p class="home-section-kicker">Recent Highlights</p>
+        <div class="home-mini-list">
+          {% for post in spotlight_posts %}
+            <a class="home-mini-list__item" href="{{ post.url | relative_url }}">
+              <span class="home-mini-list__date">{{ post.date | date: "%m.%d" }}</span>
+              <span class="home-mini-list__title">{{ post.title }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+    </aside>
+  </section>
+{% endif %}
+
+<section class="home-stream">
+  <div class="home-stream__header">
+    <div>
+      <p class="home-section-kicker">Latest Writing</p>
+      <h3 class="archive__subtitle">最近更新</h3>
+    </div>
+    <a class="home-stream__link" href="{{ '/categories/' | relative_url }}">浏览全部分类</a>
+  </div>
+
+  <div class="home-stream__grid">
+    {% for post in stream_posts %}
+      <article class="home-post-card">
+        <p class="home-post-card__meta">
+          <span>{{ post.date | date: "%Y.%m.%d" }}</span>
+          {% if post.categories and post.categories[0] %}
+            <span>{{ post.categories[0] }}</span>
+          {% endif %}
+        </p>
+        <h4 class="home-post-card__title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h4>
+        {% if post.excerpt %}
+          <p class="home-post-card__excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 120 }}</p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+</section>
 
 {% include paginator.html %}

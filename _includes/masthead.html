@@ -11,22 +11,22 @@
           {{ site.masthead_title | default: site.title }}
           {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
         </a>
-        <ul class="visible-links">
-          {%- for link in site.data.navigation.main -%}
-            <li class="masthead__menu-item">
-              <a
-                href="{{ link.url | relative_url }}"
-                {% if link.description %} title="{{ link.description }}"{% endif %}
-                {% if link.target %} target="{{ link.target }}"{% endif %}
-              >{{ link.title }}</a>
-            </li>
-          {%- endfor -%}
-        </ul>
+        <ul class="visible-links"></ul>
         {% if site.search == true %}
-        <button class="search__toggle" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
-          <i class="fas fa-search"></i>
-        </button>
+          <div class="nav-search" role="search">
+            <div class="nav-search__box">
+              <i class="fas fa-search nav-search__icon" aria-hidden="true"></i>
+              <input
+                type="search"
+                id="nav-search-input"
+                class="nav-search__input"
+                autocomplete="off"
+                aria-label="{{ site.data.ui-text[site.locale].search_label_text | default: 'Enter your search term...' }}"
+                placeholder="搜索文章、主题、关键词"
+              >
+            </div>
+            <div id="nav-search-results" class="nav-search__results" hidden></div>
+          </div>
         {% endif %}
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>

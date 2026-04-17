@@ -2,6 +2,52 @@
 layout: archive
 ---
 
-{{ content }}
+{% assign items_max = 0 %}
+{% for item in site.categories %}
+  {% if item[1].size > items_max %}
+    {% assign items_max = item[1].size %}
+  {% endif %}
+{% endfor %}
 
-{% include posts-taxonomy.html taxonomies=site.categories %}
+<section class="category-hub">
+  <div class="category-hub__intro">
+    <p class="home-section-kicker">Category Directory</p>
+    <h2 class="category-hub__title">按主题浏览文章</h2>
+    <p class="category-hub__lead">
+      把内容按问题域拆开，方便先按主题扫一遍，再进入具体文章深挖。
+    </p>
+  </div>
+
+  <div class="category-hub__meta">
+    <div class="category-hub__stat">
+      <span class="category-hub__stat-value">{{ site.categories | size }}</span>
+      <span class="category-hub__stat-label">个分类</span>
+    </div>
+    <div class="category-hub__stat">
+      <span class="category-hub__stat-value">{{ site.posts | size }}</span>
+      <span class="category-hub__stat-label">篇文章</span>
+    </div>
+  </div>
+</section>
+
+<section class="category-overview">
+  <div class="category-overview__header">
+    <div>
+      <p class="home-section-kicker">Overview</p>
+      <h2 class="archive__subtitle">分类总览</h2>
+    </div>
+  </div>
+
+  <div class="category-overview__grid">
+    {% for i in (1..items_max) reversed %}
+      {% for item in site.categories %}
+        {% if item[1].size == i %}
+          <a class="category-overview__card" href="#{{ item[0] | slugify }}">
+            <span class="category-overview__name">{{ item[0] }}</span>
+            <span class="category-overview__count">{{ item[1].size }} 篇</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</section>
