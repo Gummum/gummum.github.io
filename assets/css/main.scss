@@ -496,6 +496,18 @@ a:hover {
   border-top: 3px solid #8a6120;
   background: linear-gradient(160deg, rgba(255, 251, 237, 0.98), rgba(255,255,255,0.82));
 }
+.home-topic-grid .home-topic-card:nth-child(7) {
+  border-top: 3px solid #c94040;
+  background: linear-gradient(160deg, rgba(255, 243, 243, 0.98), rgba(255,255,255,0.82));
+}
+.home-topic-grid .home-topic-card:nth-child(8) {
+  border-top: 3px solid #2e7d9e;
+  background: linear-gradient(160deg, rgba(239, 248, 253, 0.98), rgba(255,255,255,0.82));
+}
+.home-topic-grid .home-topic-card:nth-child(9) {
+  border-top: 3px solid #5d7a3e;
+  background: linear-gradient(160deg, rgba(243, 249, 238, 0.98), rgba(255,255,255,0.82));
+}
 
 .home-topic-card__title,
 .home-support-story__title,

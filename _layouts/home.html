@@ -28,44 +28,62 @@ layout: archive
 
   <section class="home-topic-board">
     <div class="home-section-heading">
-      <h2 class="archive__subtitle">六大专题</h2>
+      <h2 class="archive__subtitle">九大专题</h2>
     </div>
 
     <div class="home-topic-grid">
-      <a class="home-topic-card" href="{{ 'UNIX环境高级编程' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
-        <p class="home-topic-card__eyebrow">System Basics</p>
-        <h3 class="home-topic-card__title">Linux 与 UNIX 系统基础</h3>
-        <p class="home-topic-card__desc">进程、线程、文件 IO、信号、IPC 与系统接口行为，是很多问题的起点。</p>
-      </a>
-
-      <a class="home-topic-card home-topic-card--tinted" href="{{ 'mm' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+      <a class="home-topic-card" href="{{ 'mm' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
         <p class="home-topic-card__eyebrow">Kernel Memory</p>
-        <h3 class="home-topic-card__title">Linux 内核 mm 专题</h3>
-        <p class="home-topic-card__desc">围绕 VMA、页表、缺页、回收、迁移与 slab，把内存子系统写成系列地图。</p>
+        <h3 class="home-topic-card__title">内存子系统</h3>
+        <p class="home-topic-card__desc">围绕 VMA、页表、缺页、回收、迁移与 slab、buddy</p>
       </a>
 
-      <a class="home-topic-card" href="{{ 'freertos' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
-        <p class="home-topic-card__eyebrow">RTOS</p>
-        <h3 class="home-topic-card__title">FreeRTOS 与实时系统</h3>
-        <p class="home-topic-card__desc">任务调度、同步互斥、中断、低功耗、时间管理与资源约束下的设计权衡。</p>
+      <a class="home-topic-card" href="{{ '文件系统' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Kernel FS</p>
+        <h3 class="home-topic-card__title">文件系统子系统</h3>
+        <p class="home-topic-card__desc">VFS 抽象层、ext4、tmpfs、page cache 与 io_uring</p>
+      </a>
+
+      <a class="home-topic-card" href="{{ 'CPU' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Kernel CPU</p>
+        <h3 class="home-topic-card__title">调度子系统</h3>
+        <p class="home-topic-card__desc">进程调度、CPU 缓存、中断、上下文切换与 arm64 体系结构的核心机制。</p>
+      </a>
+
+      <a class="home-topic-card" href="{{ '计算机网络' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Protocols</p>
+        <h3 class="home-topic-card__title">计算机网络</h3>
+        <p class="home-topic-card__desc">从传统网络到有线、无线通信协议，重点看分层模型、链路行为和接口约束。</p>
+      </a>
+
+      <a class="home-topic-card" href="{{ 'ros' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Robotics</p>
+        <h3 class="home-topic-card__title">ROS1/ROS2 机器人操作系统</h3>
+        <p class="home-topic-card__desc">节点、话题、服务、动作与 tf 坐标变换，覆盖 ROS1/ROS2 的核心通信机制。</p>
       </a>
 
       <a class="home-topic-card" href="{{ 'C++与系统编程' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
         <p class="home-topic-card__eyebrow">Language + Systems</p>
         <h3 class="home-topic-card__title">C++ 与系统编程</h3>
-        <p class="home-topic-card__desc">把语言特性放回工程语境里看，关注资源管理、并发语义和接口设计。</p>
+        <p class="home-topic-card__desc">深入理解C++</p>
       </a>
 
-      <a class="home-topic-card" href="{{ '计算机网络' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
-        <p class="home-topic-card__eyebrow">Protocols</p>
-        <h3 class="home-topic-card__title">网络与通信协议</h3>
-        <p class="home-topic-card__desc">从传统网络到有线、无线通信协议，重点看分层模型、链路行为和接口约束。</p>
+      <a class="home-topic-card" href="{{ 'coredump分析' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Debugging</p>
+        <h3 class="home-topic-card__title">调试与分析</h3>
+        <p class="home-topic-card__desc">coredump、gdb、perf、ftrace debug原理和工程实践</p>
       </a>
 
-      <a class="home-topic-card" href="{{ '软件架构' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
-        <p class="home-topic-card__eyebrow">Methods</p>
-        <h3 class="home-topic-card__title">调试分析与工程方法</h3>
-        <p class="home-topic-card__desc">把 coredump、设计原则、架构方法和排障思路沉淀成可以反复复用的框架。</p>
+      <a class="home-topic-card" href="{{ 'freertos' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">RTOS</p>
+        <h3 class="home-topic-card__title">FreeRTOS 与实时系统</h3>
+        <p class="home-topic-card__desc">任务调度、同步互斥、中断、低功耗、时间管理</p>
+      </a>
+
+      <a class="home-topic-card" href="{{ '传感器' | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}">
+        <p class="home-topic-card__eyebrow">Sensors</p>
+        <h3 class="home-topic-card__title">传感器与硬件接口</h3>
+        <p class="home-topic-card__desc">激光雷达、相机、IMU 与标定.</p>
       </a>
     </div>
   </section>
