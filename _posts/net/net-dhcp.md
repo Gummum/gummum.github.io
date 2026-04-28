@@ -1,5 +1,6 @@
 ---
 title: "计算机网络-DHCP"
+date: 2025-05-04
 categories:
   - 计算机网络
 ---

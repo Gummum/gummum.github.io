@@ -56,8 +56,14 @@ layout: archive
           <span class="category-section__count">{{ item[1].size }} 篇</span>
         </div>
         <ul class="category-section__list">
-          {% assign sorted_posts = item[1] | sort: "title" %}
-          {% for post in sorted_posts %}
+          {% assign pinned_posts = item[1] | where: "pinned", true %}
+          {% assign normal_posts = item[1] | where_exp: "post", "post.pinned != true" | sort: "title" %}
+          {% for post in pinned_posts %}
+            <li class="category-section__item category-section__item--pinned">
+              <a href="{{ post.url | relative_url }}" class="category-section__link">{{ post.title }}</a>
+            </li>
+          {% endfor %}
+          {% for post in normal_posts %}
             <li class="category-section__item">
               <a href="{{ post.url | relative_url }}" class="category-section__link">{{ post.title }}</a>
             </li>

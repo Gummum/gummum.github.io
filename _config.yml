@@ -318,6 +318,12 @@ defaults:
       enable_copy_code_button: true
       modified : false
       excerpt_separator: ""
+  # _posts/net
+  - scope:
+      path: "_posts/net"
+      type: posts
+    values:
+      permalink: /net/:title/
   # _pages
   - scope:
       path: ""
