@@ -1,5 +1,6 @@
 ---
 title: "终端I/O"
+date: 2025-08-09
 categories:
   - UNIX环境高级编程
 ---

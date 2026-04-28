@@ -1,5 +1,6 @@
 ---
 title: "freertos信号量"
+date: 2025-04-21
 categories:
   - freertos
 ---

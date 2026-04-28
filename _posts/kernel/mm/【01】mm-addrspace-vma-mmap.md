@@ -1,5 +1,6 @@
 ---
 title: "【01】进程地址空间与 VMA 管理（mmap/munmap/mprotect/brk）"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel

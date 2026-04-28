@@ -1,5 +1,6 @@
 ---
 title: "【04】Page Cache、Readahead 与 Writeback（filemap.c / readahead.c / page-writeback.c）"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel

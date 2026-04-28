@@ -1,5 +1,6 @@
 ---
 title: "ros1,ros2消息,服务,动作示例"
+date: 2025-06-07
 categories:
   - ros
 ---

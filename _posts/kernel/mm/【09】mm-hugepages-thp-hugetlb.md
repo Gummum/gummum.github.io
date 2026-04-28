@@ -1,5 +1,6 @@
 ---
 title: "【09】Huge Pages：THP（transparent hugepage）与 hugetlb"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel

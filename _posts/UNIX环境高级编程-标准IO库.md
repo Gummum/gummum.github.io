@@ -1,5 +1,6 @@
 ---
 title: "标准I/O库"
+date: 2025-08-09
 categories:
   - UNIX环境高级编程
 ---

@@ -1,5 +1,6 @@
 ---
 title: "UART"
+date: 2025-04-25
 categories:
   - 有线硬件通信协议
 ---

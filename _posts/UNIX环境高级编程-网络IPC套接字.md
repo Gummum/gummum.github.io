@@ -1,5 +1,6 @@
 ---
 title: "网络IPC:套接字"
+date: 2025-08-09
 categories:
   - UNIX环境高级编程
 ---

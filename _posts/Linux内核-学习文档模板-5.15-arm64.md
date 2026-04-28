@@ -1,5 +1,6 @@
 ---
 title: "【01】【模板】Linux 内核模块学习笔记（v5.15 / arm64）"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel

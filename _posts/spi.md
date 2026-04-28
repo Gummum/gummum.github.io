@@ -1,5 +1,6 @@
 ---
 title: "SPI"
+date: 2025-06-05
 categories:
   - 有线硬件通信协议
 ---

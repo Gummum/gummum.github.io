@@ -1,5 +1,6 @@
 ---
 title: "【05】物理页分配器：memblock → buddy / zones / watermarks / PCP"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel

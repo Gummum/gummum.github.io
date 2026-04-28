@@ -1,5 +1,6 @@
 ---
 title: "stm32ota方案"
+date: 2025-08-09
 categories:
   - 单片机
 ---

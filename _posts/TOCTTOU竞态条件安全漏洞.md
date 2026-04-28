@@ -1,5 +1,6 @@
 ---
 title: "TOCTTOU竞态条件安全漏洞详解"
+date: 2025-08-09
 categories:
   - C++与系统编程
 ---

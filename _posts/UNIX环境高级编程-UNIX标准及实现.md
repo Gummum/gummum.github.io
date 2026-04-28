@@ -1,5 +1,6 @@
 ---
 title: "UNIX标准及实现"
+date: 2025-08-09
 categories:
   - UNIX环境高级编程
 ---

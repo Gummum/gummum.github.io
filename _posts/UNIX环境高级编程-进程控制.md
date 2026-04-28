@@ -1,5 +1,6 @@
 ---
 title: "进程控制"
+date: 2026-04-17
 categories:
   - UNIX环境高级编程
 ---

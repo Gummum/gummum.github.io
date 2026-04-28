@@ -1,5 +1,6 @@
 ---
 title: "【08】内存碎片治理：compaction / migration / CMA（kcompactd）"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel

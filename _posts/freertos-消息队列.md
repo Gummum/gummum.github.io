@@ -1,5 +1,6 @@
 ---
 title: "freertos消息队列"
+date: 2025-04-21
 categories:
   - freertos
 ---

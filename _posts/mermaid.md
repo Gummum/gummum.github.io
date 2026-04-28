@@ -1,5 +1,6 @@
 ---
 title: "mermaid"
+date: 2025-06-21
 categories:
   - 软件开发基础
 ---

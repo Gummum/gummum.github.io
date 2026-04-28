@@ -1,5 +1,6 @@
 ---
 title: "Bluetooth"
+date: 2026-04-17
 categories:
   - 无线通信协议
 ---

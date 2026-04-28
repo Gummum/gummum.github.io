@@ -1,5 +1,6 @@
 ---
 title: "【10】内核小对象分配：SLUB/SLAB/SLOB、slub_debug 与 usercopy"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel

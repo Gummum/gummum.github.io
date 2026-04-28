@@ -1,5 +1,6 @@
 ---
 title: "glibc源码阅读环境搭建"
+date: 2025-08-09
 categories:
   - 通用
 ---

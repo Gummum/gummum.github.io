@@ -1,5 +1,6 @@
 ---
 title: "计算机网络"
+date: 2026-04-17
 categories:
   - 计算机网络
 ---
@@ -8,7 +9,7 @@ categories:
 
 ## 应用层
 
-[DHCP](计算机网络-DHCP)
+[DHCP](net-DHCP)
 
 ## 传输层
 

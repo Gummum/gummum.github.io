@@ -1,5 +1,6 @@
 ---
 title: "ros基础学习"
+date: 2025-06-07
 categories:
   - ros
 ---

@@ -1,5 +1,6 @@
 ---
 title: "freertos中断管理和临界段"
+date: 2025-04-21
 categories:
   - freertos
 ---

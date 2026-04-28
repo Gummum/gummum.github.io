@@ -1,5 +1,6 @@
 ---
 title: "freertos内存管理"
+date: 2025-04-21
 categories:
   - freertos
 ---

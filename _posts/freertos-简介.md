@@ -1,5 +1,6 @@
 ---
 title: "freertos简介"
+date: 2025-04-21
 categories:
   - freertos
 ---

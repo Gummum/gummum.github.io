@@ -1,5 +1,6 @@
 ---
 title: "freertos处理器利用率"
+date: 2025-04-21
 categories:
   - freertos
 ---

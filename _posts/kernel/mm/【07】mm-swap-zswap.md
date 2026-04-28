@@ -1,5 +1,6 @@
 ---
 title: "【07】Swap 与压缩交换：swapfile / swap cache / zswap"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel

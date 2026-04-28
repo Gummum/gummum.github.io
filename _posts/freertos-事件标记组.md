@@ -1,5 +1,6 @@
 ---
 title: "freertos事件标记组"
+date: 2025-04-22
 categories:
   - freertos
 ---

@@ -1,5 +1,6 @@
 ---
 title: "I2C"
+date: 2025-04-30
 categories:
   - 有线硬件通信协议
 ---

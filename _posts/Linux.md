@@ -1,5 +1,6 @@
 ---
 title: "Linux"
+date: 2026-04-17
 categories:
   - Linux
 ---

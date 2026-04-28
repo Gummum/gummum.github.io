@@ -1,5 +1,6 @@
 ---
 title: "init.d-rc.d"
+date: 2026-04-17
 categories:
   - Linux
 ---

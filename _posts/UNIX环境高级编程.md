@@ -1,5 +1,6 @@
 ---
 title: "UNIX环境高级编程"
+date: 2025-06-21
 categories:
   - UNIX环境高级编程
 ---

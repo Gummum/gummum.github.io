@@ -1,5 +1,6 @@
 ---
 title: "【06】内存回收：LRU / vmscan / workingset（direct reclaim + kswapd）"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel

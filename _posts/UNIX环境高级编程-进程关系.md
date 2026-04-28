@@ -1,5 +1,6 @@
 ---
 title: "进程关系"
+date: 2025-08-09
 categories:
   - UNIX环境高级编程
 ---

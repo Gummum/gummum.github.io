@@ -1,5 +1,6 @@
 ---
 title: "系统数据文件和信息"
+date: 2025-08-09
 categories:
   - UNIX环境高级编程
 ---

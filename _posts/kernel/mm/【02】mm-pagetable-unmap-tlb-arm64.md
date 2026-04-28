@@ -1,5 +1,6 @@
 ---
 title: "【02】页表、unmap 与 TLB（mmu_gather / zap / arm64 flush）"
+date: 2026-04-17
 categories:
   - Linux
   - Kernel
