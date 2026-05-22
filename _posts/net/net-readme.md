@@ -20,7 +20,7 @@ pinned: true
 
 ## 网络层
 
-[IP](net-IP)
+[IP](net-ip)
 
 [ICMP](net-ICMP)
 
